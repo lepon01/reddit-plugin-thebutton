@@ -6,7 +6,7 @@ from time import sleep
 from babel.numbers import format_number
 from pycassa.cassandra.ttypes import NotFoundException
 from pycassa.types import DateType
-from pylons import g
+from pylons import app_globals as g
 
 from r2.lib import websockets
 from r2.lib.db import tdb_cassandra

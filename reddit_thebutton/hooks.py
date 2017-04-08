@@ -1,4 +1,5 @@
-from pylons import g, c
+from pylons import app_globals as g
+from pylons import tmpl_context as c
 
 from r2.config import feature
 from r2.lib import websockets

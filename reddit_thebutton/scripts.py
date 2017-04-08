@@ -1,4 +1,4 @@
-from pylons import g
+from pylons import app_globals as g
 
 from r2.lib.utils import in_chunks
 from r2.models import Account, AccountsActiveBySR, Subreddit

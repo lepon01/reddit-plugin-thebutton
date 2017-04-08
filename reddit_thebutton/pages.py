@@ -1,4 +1,5 @@
-from pylons import c, g
+from pylons import app_globals as g
+from pylons import tmpl_context as c
 
 from r2.lib import websockets
 from r2.lib.pages import Reddit
