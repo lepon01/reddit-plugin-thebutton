@@ -47,7 +47,7 @@ class TheButton(Plugin):
             localcache_cls(),
             thebutton_memcaches,
         ))
-        g.cache_chains.update(thebutton=g.thebuttoncache)
+        g.gencache_chains.update(thebutton=g.thebuttoncache)
 
     def add_routes(self, mc):
         mc(
