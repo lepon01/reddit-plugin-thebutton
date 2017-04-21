@@ -71,6 +71,19 @@ class ButtonPressByUser(tdb_cassandra.View):
             return True
 
 
+class ButtonActivity(tdb_cassandra.UuidThing):
+    _read_consistency_level = tdb_cassandra.CL.ONE
+    _use_db = True
+    _connection_pool = 'main'
+    _ttl = timedelta(minutes=15)
+    _str_props = ('account_id36',)
+
+    def _create(cls, user):
+        ba = cls(account_id36=user._id36)
+        ba._commit()
+        return ba
+
+
 def press_button(user):
     press_time = datetime.now(g.tz)
     ButtonPressByUser.pressed(user, press_time)
