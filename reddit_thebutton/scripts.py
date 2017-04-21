@@ -1,9 +1,11 @@
 from pylons import app_globals as g
 
 from r2.lib.utils import in_chunks
-from r2.models import Account, AccountsActiveBySR, Subreddit
-from reddit_thebutton.models import ACCOUNT_CREATION_CUTOFF
-
+from r2.models import Account, Subreddit
+from reddit_thebutton.models import (
+    ACCOUNT_CREATION_CUTOFF,
+    ButtonActivity
+)
 from collections import Counter
 
 
@@ -12,9 +14,7 @@ def update_flair_counts():
     user_ids = []
 
     sr = Subreddit._byID(g.live_config["thebutton_srid"], data=True)
-    raw = AccountsActiveBySR._cf.xget(sr._id36)
-    for uid, _ in raw:
-        user_ids.append(uid)
+    raw = [ba._id36 for ba in ButtonActivity._all()]
 
     for user_chunk in in_chunks(user_ids, size=100):
         users = Account._byID36(user_chunk, data=True, return_dict=False)
