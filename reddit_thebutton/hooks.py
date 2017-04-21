@@ -8,6 +8,7 @@ from r2.lib.pages import SideBox
 from r2.models import Subreddit, NotFound
 
 from reddit_thebutton.pages import TheButton
+from reddit_thebutton.models import ButtonActivity
 
 hooks = HookRegistrar()
 
@@ -42,3 +43,7 @@ def add_home_sidebox():
         link="/r/%s" % sr.name,
         target="_blank",
     )
+
+@hooks.on('plugins.set_up_user_context')
+def record_activity():
+    return ButtonActivity._create(user=c.user)
