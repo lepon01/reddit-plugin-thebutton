@@ -78,6 +78,7 @@ class ButtonActivity(tdb_cassandra.UuidThing):
     _ttl = timedelta(minutes=15)
     _str_props = ('account_id36',)
 
+    @classmethod
     def _create(cls, user):
         ba = cls(account_id36=user._id36)
         ba._commit()
